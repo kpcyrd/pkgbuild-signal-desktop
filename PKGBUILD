@@ -11,6 +11,7 @@ arch=('x86_64')
 url="https://signal.org"
 depends=('gtk3' 'libvips' 'libxss' 'hicolor-icon-theme' 'alsa-lib' 'openjpeg2')
 makedepends=('yarn' 'git' 'git-lfs' 'nodejs' 'npm' 'python' 'libxcrypt-compat')
+optdepends=('xdg-desktop-portal: Screensharing with Wayland')
 source=(
   "${pkgname}-${pkgver}.tar.gz::https://github.com/signalapp/${_pkgname}/archive/v${pkgver}.tar.gz"
   "${pkgname}.desktop"
