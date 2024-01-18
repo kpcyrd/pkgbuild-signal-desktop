@@ -72,6 +72,8 @@ package() {
   cd "${_pkgname}-${pkgver}"
 
   install -d "${pkgdir}/usr/"{lib,bin}
+  mkdir release/linux-unpacked/sticker-creator
+  cp -a sticker-creator/dist release/linux-unpacked/sticker-creator/dist
   cp -a release/linux-unpacked "${pkgdir}/usr/lib/${pkgname}"
   ln -s "/usr/lib/${pkgname}/${pkgname}" "${pkgdir}/usr/bin/"
 
