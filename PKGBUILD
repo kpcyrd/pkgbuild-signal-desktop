@@ -4,7 +4,7 @@
 pkgname=signal-desktop
 _pkgname=Signal-Desktop
 pkgver=6.44.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
 arch=('x86_64')
@@ -60,6 +60,11 @@ prepare() {
 build() {
   cd "${_pkgname}-${pkgver}"
   yarn generate
+  yarn build
+
+  cd sticker-creator
+  rm -rf dist
+  yarn install
   yarn build
 }
 
