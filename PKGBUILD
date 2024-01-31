@@ -54,11 +54,20 @@ prepare() {
   # Allow higher Node versions
   sed 's#"node": "#&>=#' -i package.json
 
+  cd sticker-creator
+  yarn install
+
+  cd ..
   yarn install --ignore-engines
 }
 
 build() {
   cd "${_pkgname}-${pkgver}"
+
+  cd sticker-creator
+  yarn build
+
+  cd ..
   yarn generate
   yarn build
 }
