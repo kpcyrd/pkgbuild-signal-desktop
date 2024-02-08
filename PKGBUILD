@@ -3,7 +3,7 @@
 
 pkgname=signal-desktop
 _pkgname=Signal-Desktop
-pkgver=6.46.0
+pkgver=6.47.0
 pkgrel=1
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
@@ -17,12 +17,21 @@ depends=(
   'libasound.so'
   'libatk-bridge-2.0.so'
   'libcairo.so'
+  'libcups'
   'libdbus-1.so'
+  'libdrm'
   'libexpat.so'
   'libgio-2.0.so'
   'libpango-1.0.so'
+  'libx11'
+  'libxcb'
+  'libxdamage'
+  'libxext'
+  'libxfixes'
   'libxkbcommon.so'
-  'libxss'
+  'libxrandr'
+  'mesa'
+  'nspr'
   'nss'
 )
 makedepends=(
@@ -39,9 +48,9 @@ source=(
   "${pkgname}-${pkgver}.tar.gz::https://github.com/signalapp/${_pkgname}/archive/v${pkgver}.tar.gz"
   "${pkgname}.desktop"
 )
-sha256sums=('0961917d0c920246a01e77a8eba62bf7de3dde9ff83070e5ad6d4d9894a8ccb2'
+sha256sums=('87ce5fcee1535bfd526a48da3e845c2eca4423449855f91c548bc3d2245d632d'
             '913de2dc32db1831c9319ce7b347f51894e6fff0bf196118093a675dac874b91')
-b2sums=('cbf3e418aeabedf2835148dd1ce67478aecb5b041177879a540d6c829ce0191ff03be3da8ac7327c4c3e99c59b3939a0f1bf58dfdbdd53b1496891ab55161b1b'
+b2sums=('69eea387828b745c51b818fb0bb1330d8eb644f395333bf243cb2f0c5f3afe323cff0edc9c3a2ebb4c14a33621e60239f4182cf489e9c0985ef6816ddea941af'
         'e157cd0536b1b340c79385e99fcc27b9d48bef3c338562caaa78fe24bc7b8f00f6a757f6d4a47ee6c9e8c1138a1615dce7f1414dd1e6a9d1d06b682a7baa9130')
 
 prepare() {
