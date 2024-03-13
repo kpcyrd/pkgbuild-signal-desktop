@@ -4,7 +4,7 @@
 pkgname=signal-desktop
 _pkgname=Signal-Desktop
 pkgver=7.1.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
 arch=('x86_64')
@@ -48,18 +48,18 @@ makedepends=(
 optdepends=('xdg-desktop-portal: Screensharing with Wayland')
 source=(
   "${pkgname}-${pkgver}.tar.gz::https://github.com/signalapp/${_pkgname}/archive/v${pkgver}.tar.gz"
+  "dns-fallback-${pkgver}.json::https://raw.githubusercontent.com/kpcyrd/signal-desktop-dns-fallback-extractor/${pkgver}/dns-fallback.json"
   "${pkgname}.desktop"
 )
 sha256sums=('43f671912c893656bcb356d6970de29b1872a9b94b3face3527cfcc3545df9da'
+            'fbe42d3168d582f30cd56a983938d22657a8a5dd020ea4ac26573d87a20cb058'
             '913de2dc32db1831c9319ce7b347f51894e6fff0bf196118093a675dac874b91')
 b2sums=('ac5d342cb497ca2540e9778823cee0c6ef33cea21e72f74af9415db8b03b9b4fb8dd83b6f8818853a82c0006e6fbc934b2f8fba73e22f45351fee28b7d2206ce'
+        'b9df6a73f079940d729e74b92e9c7b095430ed6d44e50f7a67bcdc7d15278ae7c767549971ad869617874d93c8f3237f65fdac2ff4ade5f973f903fce7d4d9c2'
         'e157cd0536b1b340c79385e99fcc27b9d48bef3c338562caaa78fe24bc7b8f00f6a757f6d4a47ee6c9e8c1138a1615dce7f1414dd1e6a9d1d06b682a7baa9130')
 
 prepare() {
   cd "${_pkgname}-${pkgver}"
-
-  # temporary fix for openssl3
-  export NODE_OPTIONS=--openssl-legacy-provider
 
   # git-lfs hook needs to be installed for one of the dependencies
   git lfs install
@@ -67,21 +67,25 @@ prepare() {
   # Allow higher Node versions
   sed 's#"node": "#&>=#' -i package.json
 
-  cd sticker-creator
-  yarn install
+  # Install dependencies for sticker-creator
+  yarn --cwd ./sticker-creator/ install
 
-  cd ..
+  # Install dependencies for signal-desktop
   yarn install --ignore-engines
 }
 
 build() {
   cd "${_pkgname}-${pkgver}"
 
-  cd sticker-creator
-  yarn build
+  # Build the sticker creator
+  yarn --cwd ./sticker-creator/ build
 
-  cd ..
-  yarn generate
+  # Fix reproducible builds, use official dns-fallback.json instead of the generated one
+  # https://github.com/signalapp/Signal-Desktop/issues/6823
+  cp "../dns-fallback-${pkgver}.json" build/dns-fallback.json
+  > ts/scripts/generate-dns-fallback.ts
+
+  # Build signal-desktop
   yarn build
 }
 
