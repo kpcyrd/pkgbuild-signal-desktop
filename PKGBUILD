@@ -3,7 +3,7 @@
 
 pkgname=signal-desktop
 _pkgname=Signal-Desktop
-pkgver=7.2.1
+pkgver=7.3.0
 pkgrel=1
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
@@ -51,11 +51,11 @@ source=(
   "dns-fallback-${pkgver}.json::https://raw.githubusercontent.com/kpcyrd/signal-desktop-dns-fallback-extractor/${pkgver}/dns-fallback.json"
   "${pkgname}.desktop"
 )
-sha256sums=('789b93bc35852dfb444116bb111357415e9a5411ab1a02f34c3f57282198cbb3'
-            '5147453f35268c18b9c61214f211253d5d98b8169f0565cc9d086ce29f098898'
+sha256sums=('4684e4402cdec95565caba1d9ba742520214374473851ca772729f998faa5aa3'
+            'c48e12530864cd77abae1890f69fdc2646533dd1a42c89db1482a45cd2c01b62'
             '913de2dc32db1831c9319ce7b347f51894e6fff0bf196118093a675dac874b91')
-b2sums=('f7796dbf343c3ab96ea7ba14f447532026348e568a9c85534aa26645a11ddba0e5ca388bf23080ff5b7cb0215a53faad3ce7ebde41856c6fd058152198dbd887'
-        'f004a5da4ef11f2beca52188020ebdf38eea130f523e18ef5029c976d3a199e7a071076d73925d2b3016ab8c420f4eb710f6cf19660d67a56accc93ba1cd4d74'
+b2sums=('741b7cd7ee0cedff72d0698eefa7f7e112889b8b9a46d21665cf849516be6ef24c46e29a7136425c9fe91755af83ac3d66f6b53584bbc07149b5a9b71a427e69'
+        '991cce5b26cae0048165748fd7ae086d7373ff84e06d25bc270b30ef8c46e8405b129fe25049066d3debdbe30a8f0d8ee275bcca85c36f74cd9fb863151834b7'
         'e157cd0536b1b340c79385e99fcc27b9d48bef3c338562caaa78fe24bc7b8f00f6a757f6d4a47ee6c9e8c1138a1615dce7f1414dd1e6a9d1d06b682a7baa9130')
 
 prepare() {
