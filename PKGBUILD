@@ -52,7 +52,7 @@ makedepends=(
 optdepends=('xdg-desktop-portal: Screensharing with Wayland')
 source=(
   "${pkgname}-${pkgver}.tar.gz::https://github.com/signalapp/${_pkgname}/archive/v${pkgver}.tar.gz"
-  "${pkgname}.desktop"
+  "signal.desktop"
   "${pkgname}.sh"
 )
 sha256sums=('f0232d07b6d253b35e02e389d2b4cc5d25d699b609d086f18fd52f696a24dca3'
@@ -99,7 +99,7 @@ package() {
 
   chmod u+s "${pkgdir}/usr/lib/signal-desktop/chrome-sandbox"
 
-  install -Dm 644 "../${pkgname}.desktop" -t "${pkgdir}/usr/share/applications"
+  install -Dm 644 "../signal.desktop" -t "${pkgdir}/usr/share/applications"
   for i in 16 24 32 48 64 128 256 512 1024; do
     install -Dm 644 "build/icons/png/${i}x${i}.png" \
       "${pkgdir}/usr/share/icons/hicolor/${i}x${i}/apps/${pkgname}.png"
