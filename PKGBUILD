@@ -3,7 +3,7 @@
 
 pkgname=signal-desktop
 _pkgname=Signal-Desktop
-pkgver=7.14.0
+pkgver=7.15.0
 pkgrel=1
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
@@ -43,7 +43,6 @@ makedepends=(
   'nodejs'
   'npm'
   'python'
-  'yarn'
 )
 optdepends=('xdg-desktop-portal: Screensharing with Wayland')
 source=(
@@ -51,16 +50,12 @@ source=(
   "dns-fallback-${pkgver}.json::https://raw.githubusercontent.com/kpcyrd/signal-desktop-dns-fallback-extractor/${pkgver}/dns-fallback.json"
   "${pkgname}.desktop"
 )
-sha256sums=('9a7640c302479cf230fd837ac56d3ce5bd61c3217fbf2f68203684753d69a46a'
-            'dfd8af2e86058d7f01a489a5f2ffd01d91992c086eb521e1f5f45af4d6b5359a'
+sha256sums=('f92ba15a86920861b4cd53cd5218934128508682d82120f195a59e9deef8e272'
+            'b5a0c13be48f47fdbf363a02ebe1f738899077b2304aa939a045503bf2e95c3b'
             'bf388df4b5bbcab5559ebbf220ed4748ed21b057f24b5ff46684e3fe6e88ccce')
-b2sums=('542f02c0c74a4bb79c787f8e9a68ca8f4d00120eb524776c4efde8f72e41e3f84bf195c3898623d586c00396fef3ae6c4c925aa10ed3d0c8dee02807c2594939'
-        'a26c4fd77093d63ab6defc0dc5382d4d6bf844071b249e7981930b3bbf7a976948c477b30b95c86a2b09913238462321f5b3e9c9a359b18240468070f60900cc'
+b2sums=('d133ae25453528dc52a948b63a5e3595658e7f2a2cbb77a57d844f7f44be8774c3678a3bbc747fff8187dc0ea439f6bea55e97459216809950e928ca5cf3774b'
+        '0368a6904966cc0399f997c11eeaab107efc146f5d601dcdceceaa6f7a1079ef2a7c8855f6dfa403a98f0f9a831ba03f3f34c9e1e2d2a619137c89e58cf39a2e'
         'ffb8f7bab4fd84aacf13e7b6d2835daf449b6650b4b3fa723456792ba7fb6cae352928fea11cb030510d558ce30036ff5a1513444f067b94c7fff0158b4f2265')
-
-# https://lore.kernel.org/regressions/8979ae0b-c443-4b45-8210-6394471dddd1@kernel.dk/
-# /bin/sh: /tmp/yarn--1716467297929-0.0038272490627193623/node: /bin/sh: bad interpreter: Text file busy
-export UV_USE_IO_URING=0
 
 prepare() {
   cd "${_pkgname}-${pkgver}"
@@ -72,17 +67,17 @@ prepare() {
   sed 's#"node": "#&>=#' -i package.json
 
   # Install dependencies for sticker-creator
-  yarn --cwd ./sticker-creator/ install
+  npm --prefix ./sticker-creator/ install
 
   # Install dependencies for signal-desktop
-  yarn install --ignore-engines
+  npm install --ignore-engines
 }
 
 build() {
   cd "${_pkgname}-${pkgver}"
 
   # Build the sticker creator
-  yarn --cwd ./sticker-creator/ build
+  npm --prefix ./sticker-creator/ run build
 
   # Fix reproducible builds, use official dns-fallback.json instead of the generated one
   # https://github.com/signalapp/Signal-Desktop/issues/6823
@@ -90,7 +85,7 @@ build() {
   > ts/scripts/generate-dns-fallback.ts
 
   # Build signal-desktop
-  yarn build
+  npm run build
 }
 
 package() {
