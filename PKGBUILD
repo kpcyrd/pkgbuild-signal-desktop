@@ -3,7 +3,7 @@
 
 pkgname=signal-desktop
 _pkgname=Signal-Desktop
-pkgver=7.20.1
+pkgver=7.21.0
 pkgrel=1
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
@@ -47,14 +47,11 @@ makedepends=(
 optdepends=('xdg-desktop-portal: Screensharing with Wayland')
 source=(
   "${pkgname}-${pkgver}.tar.gz::https://github.com/signalapp/${_pkgname}/archive/v${pkgver}.tar.gz"
-  "dns-fallback-${pkgver}.json::https://raw.githubusercontent.com/kpcyrd/signal-desktop-dns-fallback-extractor/${pkgver}/dns-fallback.json"
   "${pkgname}.desktop"
 )
-sha256sums=('871c5583a68c71c1ca5189b120106c764ffde0400daa9c095617f7594c9081a8'
-            'bce4baf878a12e8edaa3720a02886d6abbe892d23322075ba88c04b05053208f'
+sha256sums=('4506a3639685dd191f713d70ed3c6624a77cafe8fd6ff3f113b340d2cd337526'
             'bf388df4b5bbcab5559ebbf220ed4748ed21b057f24b5ff46684e3fe6e88ccce')
-b2sums=('efb469aab3af6a8625c130971c2ec2ca47a1103968eee7dbe944d0f616b2974f5e35d31c4d1bbb97cfb050665a24beb5ab234a455b956224cbb42d5e01e139a4'
-        '73561482255cb7fa8f72748bf78064b4f248aedeb9f9fb5291994a6a6e96fd0bd40a08c268a3989824f3d881012248926ee0b92c7c7d76ac508370a7e5539a1d'
+b2sums=('41295647a63efddbd7fe965aae855e3f4449ef4f56d20bd012c76ee748ff710a051e256c3cd0d23912e70028686fda2dbf348ac91631873b663824467075fddf'
         'ffb8f7bab4fd84aacf13e7b6d2835daf449b6650b4b3fa723456792ba7fb6cae352928fea11cb030510d558ce30036ff5a1513444f067b94c7fff0158b4f2265')
 
 prepare() {
@@ -78,11 +75,6 @@ build() {
 
   # Build the sticker creator
   npm --prefix ./sticker-creator/ run build
-
-  # Fix reproducible builds, use official dns-fallback.json instead of the generated one
-  # https://github.com/signalapp/Signal-Desktop/issues/6823
-  cp "../dns-fallback-${pkgver}.json" build/dns-fallback.json
-  > ts/scripts/generate-dns-fallback.ts
 
   # Build signal-desktop
   npm run build
