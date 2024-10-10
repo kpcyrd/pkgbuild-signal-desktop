@@ -1,6 +1,6 @@
 pkgbase = signal-desktop
 	pkgdesc = Signal Private Messenger for Linux
-	pkgver = 7.27.0
+	pkgver = 7.28.0
 	pkgrel = 1
 	url = https://signal.org
 	arch = x86_64
@@ -37,11 +37,11 @@ pkgbase = signal-desktop
 	depends = nspr
 	depends = nss
 	optdepends = xdg-desktop-portal: Screensharing with Wayland
-	source = signal-desktop-7.27.0.tar.gz::https://github.com/signalapp/Signal-Desktop/archive/v7.27.0.tar.gz
+	source = signal-desktop-7.28.0.tar.gz::https://github.com/signalapp/Signal-Desktop/archive/v7.28.0.tar.gz
 	source = signal-desktop.desktop
-	sha256sums = 6eb0021cdf9a57fb0b0f62e50da561c59fe557d0a86db722bfff861a42897fe4
+	sha256sums = 2d0d1f6bac0a12555b17ff9f6b97d874774fbe8c5bd28d8da629b2a13c7f9d37
 	sha256sums = bf388df4b5bbcab5559ebbf220ed4748ed21b057f24b5ff46684e3fe6e88ccce
-	b2sums = 224ca340e40c7345c39073042a7098efc5fbc55219f5033d02907db6e5c19b688fa088b755583ee30603a9e5d8f9ee0988359daddec043ecc5bc2f19167c4cad
+	b2sums = fbb15af83085cd02521d1ee83b1d685676310cd8b4d632df9d13f7150a33efe2eef697cde4f856ad10978a8e17c59101a0ded15403c95b3cec64b77638e25da9
 	b2sums = ffb8f7bab4fd84aacf13e7b6d2835daf449b6650b4b3fa723456792ba7fb6cae352928fea11cb030510d558ce30036ff5a1513444f067b94c7fff0158b4f2265
 
 pkgname = signal-desktop
