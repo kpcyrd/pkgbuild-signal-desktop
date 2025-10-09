@@ -1,9 +1,10 @@
 # Maintainer: kpcyrd <kpcyrd[at]archlinux[dot]org>
+# Maintainer: Christian Heusel <gromit@archlinux.org>
 # Contributor: Jean Lucas <jean@4ray.co>
 
 pkgname=signal-desktop
 _pkgname=Signal-Desktop
-pkgver=7.73.0
+pkgver=7.74.0
 pkgrel=1
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
@@ -52,9 +53,9 @@ source=(
   "${pkgname}-${pkgver}.tar.gz::https://github.com/signalapp/${_pkgname}/archive/v${pkgver}.tar.gz"
   "${pkgname}.desktop"
 )
-sha256sums=('8426590835327cbfba67d54a5bbe4e65e4f12a538fa05831648885e51f57febe'
+sha256sums=('bd1f0a3180823ddeeb15a3169ff97f1a6f8be99a69ac36175c667b815856070c'
             'bf388df4b5bbcab5559ebbf220ed4748ed21b057f24b5ff46684e3fe6e88ccce')
-b2sums=('4092692618fd9f3ba8688d98cea56568b3d2227f2e9b54d44d3fd3fd3e55418c9a65056f0adcf00a66417ffc4fdbe4fbc7e798bbc9f5588bb2cf662da2daa564'
+b2sums=('cb4a489c3159cd7571d193f90907e91ef63c41816f63a6610e3e79f2645d1af2e3cc5f4c9bf603a6d643f555568204adcc483171238e8cb82df90d630b6e6e5b'
         'ffb8f7bab4fd84aacf13e7b6d2835daf449b6650b4b3fa723456792ba7fb6cae352928fea11cb030510d558ce30036ff5a1513444f067b94c7fff0158b4f2265')
 
 prepare() {
