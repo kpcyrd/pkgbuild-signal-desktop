@@ -4,7 +4,7 @@
 
 pkgname=signal-desktop
 _pkgname=Signal-Desktop
-pkgver=7.79.0
+pkgver=7.80.0
 pkgrel=1
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
@@ -53,9 +53,9 @@ source=(
   "${pkgname}-${pkgver}.tar.gz::https://github.com/signalapp/${_pkgname}/archive/v${pkgver}.tar.gz"
   "${pkgname}.desktop"
 )
-sha256sums=('cd95b704311cb2b41c229c3c8c0f2f0c327b7dd18629a1acca0a0168d9b2860b'
+sha256sums=('175554a79f28ed75d883294e2e53e5da72352b5a963afc1e1c6380cfca3fba45'
             'bf388df4b5bbcab5559ebbf220ed4748ed21b057f24b5ff46684e3fe6e88ccce')
-b2sums=('33e3edc7f767e35b57372a4021ee0624229f51be487240e76794a199b419e466218dd9fea80a385218b3748d0c41477f61aa9c05e481065771fdacc2fb675ac2'
+b2sums=('a03518cbba1e18f5829573f0133893982766aec2a3c7e7cf87d1eeb8de6afbde3677c4a7a76011eacf745b3301423fd3f466fd5b4e2dce77e3e859827f0f03c2'
         'ffb8f7bab4fd84aacf13e7b6d2835daf449b6650b4b3fa723456792ba7fb6cae352928fea11cb030510d558ce30036ff5a1513444f067b94c7fff0158b4f2265')
 
 prepare() {
@@ -68,9 +68,7 @@ prepare() {
   sed 's#"node": "#&>=#' -i package.json
 
   # Install dependencies for sticker-creator
-  cd sticker-creator
-  pnpm install
-  cd ..
+  pnpm install --dir sticker-creator
 
   # Install dependencies for signal-desktop
   pnpm install
