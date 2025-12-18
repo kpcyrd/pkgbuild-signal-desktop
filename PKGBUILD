@@ -4,7 +4,7 @@
 
 pkgname=signal-desktop
 _pkgname=Signal-Desktop
-pkgver=7.82.0
+pkgver=7.83.0
 pkgrel=1
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
@@ -53,15 +53,16 @@ source=(
   "${pkgname}-${pkgver}.tar.gz::https://github.com/signalapp/${_pkgname}/archive/v${pkgver}.tar.gz"
   "${pkgname}.desktop"
 )
-sha256sums=('4059c382613e747b2a231e2919f45088c074c0e720acc8b1638f4aa6913c1f8a'
+sha256sums=('588187f8ff6c319e7d8b29306478761a270ab8cf98c9cadfa66928333ee36ed5'
             'bf388df4b5bbcab5559ebbf220ed4748ed21b057f24b5ff46684e3fe6e88ccce')
-b2sums=('33306a21dcdac23c313d61d7e937b19f3153454f2a571abdd5edf70008bb566fac97912b2d4d0ece960b84746d800924a6cd9020b3c58d2ba921ac556e9a3ebc'
+b2sums=('0d1a5847a79d60411f5b05574ca1a78f70960eeaaf0d1a2e9c2de982cff58814ed9e479399c0bc40adcc92847f852803bf5bf62c8fc9ad5898eb3b9d8b353e12'
         'ffb8f7bab4fd84aacf13e7b6d2835daf449b6650b4b3fa723456792ba7fb6cae352928fea11cb030510d558ce30036ff5a1513444f067b94c7fff0158b4f2265')
 
 prepare() {
   cd "${_pkgname}-${pkgver}"
 
   # git-lfs hook needs to be installed for one of the dependencies
+  export GIT_CONFIG_GLOBAL="$HOME/.gitconfig"
   git lfs install
 
   # Allow higher Node versions
