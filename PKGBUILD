@@ -10,6 +10,7 @@ pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
 arch=('x86_64')
 url="https://signal.org"
+install="${pkgname}.install"
 depends=(
   'alsa-lib' 'libasound.so'
   'at-spi2-core' 'libatk-bridge-2.0.so'
@@ -52,11 +53,14 @@ optdepends=('xdg-desktop-portal: Screensharing with Wayland')
 source=(
   "${pkgname}-${pkgver}.tar.gz::https://github.com/signalapp/${_pkgname}/archive/v${pkgver}.tar.gz"
   "${pkgname}.desktop"
+  "${pkgname}.sh"
 )
 sha256sums=('f0232d07b6d253b35e02e389d2b4cc5d25d699b609d086f18fd52f696a24dca3'
-            'bf388df4b5bbcab5559ebbf220ed4748ed21b057f24b5ff46684e3fe6e88ccce')
+            'bf388df4b5bbcab5559ebbf220ed4748ed21b057f24b5ff46684e3fe6e88ccce'
+            '37701c610829ea3d0ae984b468ef83870fb75358396feb85b5f13f69cdbf1e68')
 b2sums=('2569bbcb514befbee2f7ac2a509858f622c8f6bca40af089469fca7ded23a683cc4f2ef91bfa3cd1f569e13426c792849183c62343d41f9accc092cdc2f1072f'
-        'ffb8f7bab4fd84aacf13e7b6d2835daf449b6650b4b3fa723456792ba7fb6cae352928fea11cb030510d558ce30036ff5a1513444f067b94c7fff0158b4f2265')
+        'ffb8f7bab4fd84aacf13e7b6d2835daf449b6650b4b3fa723456792ba7fb6cae352928fea11cb030510d558ce30036ff5a1513444f067b94c7fff0158b4f2265'
+        '3b52b3e8530652472560fbc83f709cd1377210098c81b84cb9b14a985fbfcb349897843bb995cb772de31568517e038b497277b2fddca18b4a6dba5315d1a7c1')
 
 prepare() {
   cd "${_pkgname}-${pkgver}"
@@ -90,7 +94,8 @@ package() {
 
   install -d "${pkgdir}/usr/"{lib,bin}
   cp -a release/linux-unpacked "${pkgdir}/usr/lib/${pkgname}"
-  ln -s "/usr/lib/${pkgname}/${pkgname}" "${pkgdir}/usr/bin/"
+  # Launcher
+  install -Dm755 "${srcdir}/${pkgname}.sh" "${pkgdir}/usr/bin/${pkgname}"
 
   chmod u+s "${pkgdir}/usr/lib/signal-desktop/chrome-sandbox"
 
