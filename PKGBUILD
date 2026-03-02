@@ -5,7 +5,7 @@
 pkgname=signal-desktop
 _pkgname=Signal-Desktop
 pkgver=8.0.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
 arch=('x86_64')
