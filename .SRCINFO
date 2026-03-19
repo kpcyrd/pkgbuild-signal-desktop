@@ -1,6 +1,6 @@
 pkgbase = signal-desktop
 	pkgdesc = Signal Private Messenger for Linux
-	pkgver = 8.2.1
+	pkgver = 8.3.0
 	pkgrel = 1
 	url = https://signal.org
 	install = signal-desktop.install
@@ -52,13 +52,13 @@ pkgbase = signal-desktop
 	depends = systemd-libs
 	depends = libudev.so
 	optdepends = xdg-desktop-portal: Screensharing with Wayland
-	source = signal-desktop-8.2.1.tar.gz::https://github.com/signalapp/Signal-Desktop/archive/v8.2.1.tar.gz
+	source = signal-desktop-8.3.0.tar.gz::https://github.com/signalapp/Signal-Desktop/archive/v8.3.0.tar.gz
 	source = signal.desktop
 	source = signal-desktop.sh
-	sha256sums = e72d44e93ee579ab99b3f308c07a10ac2eecf14dd86197ac7efca6855f3facc4
+	sha256sums = 1ff37afceba84a43e7295b05ddb252124ac813c122323af3be2e472a3b18352c
 	sha256sums = bf388df4b5bbcab5559ebbf220ed4748ed21b057f24b5ff46684e3fe6e88ccce
 	sha256sums = 37701c610829ea3d0ae984b468ef83870fb75358396feb85b5f13f69cdbf1e68
-	b2sums = 5e617baa9c111f356772b56687c3c1bae324fb3e0ba9b03ea680a23222968cd5029190697d88138dcd0c3b503b98f4c80b551adf5f8647b6a05a1a8af3d34ac0
+	b2sums = 3b457cf6e41355a0de06b3633653de2b44a44d1ff7a2f080cbb287c0a6646361bf4d2dc03b0e5d701bfc60dc418714238830ec9c49cc432002e038a680676fb6
 	b2sums = ffb8f7bab4fd84aacf13e7b6d2835daf449b6650b4b3fa723456792ba7fb6cae352928fea11cb030510d558ce30036ff5a1513444f067b94c7fff0158b4f2265
 	b2sums = 3b52b3e8530652472560fbc83f709cd1377210098c81b84cb9b14a985fbfcb349897843bb995cb772de31568517e038b497277b2fddca18b4a6dba5315d1a7c1
 
