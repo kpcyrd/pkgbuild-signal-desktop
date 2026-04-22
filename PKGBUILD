@@ -8,7 +8,7 @@ pkgver=8.8.0
 pkgrel=1
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
-arch=('x86_64')
+arch=('x86_64' 'aarch64')
 url="https://signal.org"
 install="${pkgname}.install"
 depends=(
@@ -73,6 +73,9 @@ prepare() {
   # Allow higher Node versions
   sed 's#"node": "#&>=#' -i package.json
 
+  # Upgrade electron-builder to support aarch64
+  sed -i 's/"electron-builder": "26\.0\.14",/"electron-builder": "26.0.20",/' package.json
+
   # Install dependencies for sticker-creator
   pnpm install --dir sticker-creator
 
@@ -94,7 +97,13 @@ package() {
   cd "${_pkgname}-${pkgver}"
 
   install -d "${pkgdir}/usr/"{lib,bin}
-  cp -a release/linux-unpacked "${pkgdir}/usr/lib/${pkgname}"
+
+  case "${CARCH}" in
+    "aarch64") folder="linux-arm64-unpacked" ;;
+    *) folder="linux-unpacked" ;;
+  esac
+
+  cp -a release/${folder} "${pkgdir}/usr/lib/${pkgname}"
   # Launcher
   install -Dm755 "${srcdir}/${pkgname}.sh" "${pkgdir}/usr/bin/${pkgname}"
 
