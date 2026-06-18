@@ -5,6 +5,7 @@ pkgbase = signal-desktop
 	url = https://signal.org
 	install = signal-desktop.install
 	arch = x86_64
+	arch = aarch64
 	license = AGPL-3.0-only
 	makedepends = git
 	makedepends = git-lfs

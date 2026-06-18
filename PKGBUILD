@@ -8,7 +8,7 @@ pkgver=8.15.0
 pkgrel=1
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
-arch=('x86_64')
+arch=('x86_64' 'aarch64')
 url="https://signal.org"
 install="${pkgname}.install"
 depends=(
@@ -86,6 +86,14 @@ build() {
   # Build the sticker creator
   pnpm --prefix ./sticker-creator/ run build
 
+  case "${CARCH}" in
+    "aarch64") electron_arch="arm64" ;;
+    *) electron_arch="x64" ;;
+  esac
+
+  # Configure electron-builder's Linux target for the current Arch architecture.
+  node scripts/prepare_linux_build.mjs deb "${electron_arch}"
+
   # Build signal-desktop
   pnpm run build
 }
@@ -94,7 +102,13 @@ package() {
   cd "${_pkgname}-${pkgver}"
 
   install -d "${pkgdir}/usr/"{lib,bin}
-  cp -a release/linux-unpacked "${pkgdir}/usr/lib/${pkgname}"
+
+  case "${CARCH}" in
+    "aarch64") folder="linux-arm64-unpacked" ;;
+    *) folder="linux-unpacked" ;;
+  esac
+
+  cp -a release/${folder} "${pkgdir}/usr/lib/${pkgname}"
   # Launcher
   install -Dm755 "${srcdir}/${pkgname}.sh" "${pkgdir}/usr/bin/${pkgname}"
 
