@@ -5,7 +5,7 @@
 pkgname=signal-desktop
 _pkgname=Signal-Desktop
 pkgver=8.31.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Signal Private Messenger for Linux"
 license=('AGPL-3.0-only')
 arch=('x86_64' 'aarch64')
@@ -118,6 +118,15 @@ package() {
   for i in 16 24 32 48 64 128 256 512 1024; do
     install -Dm 644 "build/icons/png/${i}x${i}.png" \
       "${pkgdir}/usr/share/icons/hicolor/${i}x${i}/apps/${pkgname}.png"
+  done
+
+  # move the polkit actions into the correct place. See also
+  # https://github.com/signalapp/Signal-Desktop/blob/v8.30.0/patches/app-builder-lib.patch#L155-L181
+  install -d "${pkgdir}/usr/share/polkit-1/actions"
+  for _policy in enable-backups view-aep plaintext-export; do
+    mv "${pkgdir}/usr/lib/${pkgname}/resources/org.signalapp.${_policy}.policy" \
+      "${pkgdir}/usr/share/polkit-1/actions/org.signalapp.${pkgname}.${_policy}.policy"
+    chmod 644 "${pkgdir}/usr/share/polkit-1/actions/org.signalapp.${pkgname}.${_policy}.policy"
   done
 }
 
