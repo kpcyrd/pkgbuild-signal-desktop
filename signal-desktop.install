@@ -1,5 +1,9 @@
 post_install() {
     echo "==> NOTE: Custom flags should be put directly in: ~/.config/signal-desktop-flags.conf"
+
+    # notify running signal-desktop a new version was fully installed
+    # https://github.com/signalapp/Signal-Desktop/blob/39d0ead8780ff6780117ba9ab24ed42fa33c633c/patches/app-builder-lib.patch#L182-L183
+    touch /usr/lib/signal-desktop/.signal-postinst
 }
 
 post_upgrade() {
